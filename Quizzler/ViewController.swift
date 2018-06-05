@@ -5,6 +5,7 @@ class ViewController: UIViewController {
     let allQuestions = QuestionBank();
     var pickedAnswer : Bool = false;
     var questionNumber : Int = 0;
+    var score : Int = 0;
     
     //UI Elements from the stroyboard are already linked up for you.
     @IBOutlet weak var questionLabel: UILabel!
@@ -46,7 +47,11 @@ class ViewController: UIViewController {
     
     //This method will update all the views on screen (progress bar, score label, etc.)
     func updateUI() {
+        //use "\()" to escape int and convert to string
+        scoreLabel.text = "Score: \(score)";
+        progressLabel.text = "\(questionNumber + 1) / 13";
         
+        progressBar.frame.size.width = (view.frame.size.width / 13) * CGFloat(questionNumber + 1);
     }
     
     //This method will update the question text and check if we reached the end.
@@ -54,6 +59,8 @@ class ViewController: UIViewController {
         
         if questionNumber <= 12 {
             questionLabel.text = allQuestions.list[questionNumber].questionText;
+            
+            updateUI();
         }
         else {
             let alert = UIAlertController(title: "Awesome", message: "You've finished all the questions, would you like to start over?", preferredStyle: .alert);
@@ -75,16 +82,18 @@ class ViewController: UIViewController {
         let correctAnswer = allQuestions.list[questionNumber].answer;
         
         if correctAnswer == pickedAnswer {
-            print("Yay you got it!");
+            ProgressHUD.showSuccess("Correct!")
+            score += 1;
         }
         else {
-            print("Wrong!");
+            ProgressHUD.showError("Wrong!")
         }
     }
     
     //This method will wipe the board clean, so that the user can retake the quiz.
     func startOver() {
         
+        score = 0;
         questionNumber = 0;
         nextQuestion();
         
