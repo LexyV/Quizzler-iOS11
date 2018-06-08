@@ -29,7 +29,7 @@ class QuestionBank {
         
         list.append(Question(text: "Google was originally called \"Backrub\".", correctAnswer: true))
         
-        list.append(Question(text: "Buzz Aldrin\'s mother\'s maiden name was \"Moon\".", correctAnswer: true))
+        list.append(Question(text: "Lexy Vanderford is the coolest person EVER!", correctAnswer: true))
         
         list.append(Question(text: "The loudest sound produced by any animal is 188 decibels. That animal is the African Elephant.", correctAnswer: false))
         
